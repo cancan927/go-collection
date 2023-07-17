@@ -59,6 +59,11 @@ func (a *ArrayList[T]) Set(index int, newVal T) error {
 	return nil
 }
 
+func (a *ArrayList[T]) Append(newVal T) {
+	a.elements = append(a.elements, newVal)
+	a.size++
+}
+
 func (a *ArrayList[T]) Insert(index int, newVal T) error {
 	if index < 0 || index > a.size {
 		return errors.New("index out of bounds")
@@ -74,7 +79,7 @@ func (a *ArrayList[T]) Insert(index int, newVal T) error {
 	}
 	//2. insert into the tail
 	if index == a.size {
-		a.Append(newVal)
+		a.elements = append(a.elements, newVal)
 		return nil
 	}
 
@@ -86,11 +91,6 @@ func (a *ArrayList[T]) Insert(index int, newVal T) error {
 	a.elements = newElements
 	a.size++
 	return nil
-}
-
-func (a *ArrayList[T]) Append(newVal T) {
-	a.elements = append(a.elements, newVal)
-	a.size++
 }
 
 func (a *ArrayList[T]) Delete(index int) error {
