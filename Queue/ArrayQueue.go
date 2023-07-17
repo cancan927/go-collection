@@ -7,9 +7,12 @@ type ArrayQueue[T any] struct {
 	len      int
 }
 
-func NewArrayQueue[T any]() *ArrayQueue[T] {
+func NewArrayQueue[T any](capacity int) *ArrayQueue[T] {
+	if capacity < 10 {
+		capacity = 10
+	}
 	queue := new(ArrayQueue[T])
-	queue.elements = make([]T, 0, 10)
+	queue.elements = make([]T, 0, capacity)
 	queue.len = 0
 	return queue
 }
