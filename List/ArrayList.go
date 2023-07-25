@@ -82,7 +82,6 @@ func (a *ArrayList[T]) Insert(index int, newVal T) error {
 		a.elements = append(a.elements, newVal)
 		return nil
 	}
-
 	//normal case
 	newElements := make([]T, 0, a.size+10)
 	newElements = append(newElements, a.elements[:index]...)
