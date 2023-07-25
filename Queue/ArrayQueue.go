@@ -31,6 +31,7 @@ func (a *ArrayQueue[T]) EnQueue(newVal T) {
 }
 
 func (a *ArrayQueue[T]) DeQueue() (T, error) {
+	//TODO 这里假如出队元素很多，是不是考虑缩容
 	if a.Size() == 0 {
 		var t T
 		return t, errors.New("queue is empty")
