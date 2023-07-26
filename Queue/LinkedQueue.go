@@ -2,12 +2,12 @@ package Queue
 
 import "errors"
 
-type Node[T any] struct {
-	next, prev *Node[T]
+type node[T any] struct {
+	next, prev *node[T]
 	value      T
 }
 type LinkedQueue[T any] struct {
-	root Node[T]
+	root node[T]
 	size int
 }
 
@@ -32,7 +32,7 @@ func (l *LinkedQueue[T]) IsEmpty() bool {
 
 // EnQueue 新元素加入队列尾部
 func (l *LinkedQueue[T]) EnQueue(newVal T) {
-	e := &Node[T]{value: newVal}
+	e := &node[T]{value: newVal}
 	//新元素的后继指向root
 	e.next = &l.root
 	//新元素前驱指向原队尾节点
@@ -56,6 +56,10 @@ func (l *LinkedQueue[T]) DeQueue() (T, error) {
 	front.next.prev = &l.root
 	//将根节点的后继指向第二个元素
 	l.root.next = front.next
+
+	front.prev = nil
+	front.next = nil
+
 	l.size--
 	return front.value, nil
 }
