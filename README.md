@@ -1,4 +1,4 @@
-# Go-DataStruct
+# Go-Collection
 
 # 说明
 1. 本仓库侧重数据结构概念实现
