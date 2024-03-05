@@ -1,5 +1,6 @@
 package Tree
 
+// TreeNode struct is used to store the elements of the tree
 type TreeNode struct {
 	value       int
 	left, right *TreeNode
@@ -33,6 +34,7 @@ func inOrder(head *TreeNode) []int {
 	return result
 }
 
+// 后序遍历
 func postOrder(head *TreeNode) []int {
 	result := make([]int, 0)
 	if head == nil {

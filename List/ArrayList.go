@@ -5,67 +5,64 @@ import (
 	"reflect"
 )
 
-// ArrayList struct is used to store an array of elements and the size of the array
+// ArrayList 结构体用于存储数组列表的元素和大小
 type ArrayList[T any] struct {
-	// This is the elements of the array
 	elements []T
-	// This is the size of the array
-	size int
+	size     int
 }
 
-// NewArrayList create a new ArrayList with a capacity
+// NewArrayList 方法创建一个新的数组列表
 func NewArrayList[T any](capacity int) *ArrayList[T] {
-	// Check if the capacity is less than 10
+	// 检查容量是否小于10
 	if capacity < 10 {
-		// If so, set the capacity to 10
+		// 如果是，将容量设置为10
 		capacity = 10
 	}
-	// Create a new ArrayList
+	// 创建一个新的ArrayList[T]，并将其elements数组初始化为一个空的T类型切片
 	list := &ArrayList[T]{
-		// Initialize the elements array with an empty slice of type T
+		// 初始化
 		elements: make([]T, 0, capacity),
-		// Initialize the size to 0
-		size: 0,
+		size:     0,
 	}
-	// Return the new ArrayList
+	// 返回新的ArrayList[T]
 	return list
 }
 
-// Size function returns the size of the ArrayList
+// Size 方法返回数组列表的大小
 func (a *ArrayList[T]) Size() int {
 	return a.size
 }
 
-// IsEmpty function returns a boolean value indicating whether the ArrayList is empty or not
+// IsEmpty 方法返回一个布尔值，指示数组列表是否为空
 func (a *ArrayList[T]) IsEmpty() bool {
 	return a.size == 0
 }
 
-// Clear function clears the elements of an ArrayList[T] and sets the size to 0
+// Clear 方法清除数组列表的元素并将大小设置为0
 func (a *ArrayList[T]) Clear() {
-	// Create a new slice of type T with the same length as the original array
+	// 创建一个新的T类型切片，并将其赋值给elements
 	a.elements = make([]T, 0, 10)
-	// Set the size of the ArrayList[T] to 0
+	// 将size设置为0
 	a.size = 0
 }
 
-// Get function takes in an ArrayList of type T and an integer index and returns the element at the given index and an error
+// Get 方法返回数组列表中给定索引的元素
 func (a *ArrayList[T]) Get(index int) (T, error) {
-	//Check if the index is within the bounds of the ArrayList
+	//检查索引是否在数组列表的范围内
 	if index < 0 || index >= a.size {
-		//If not, return an error
-		var t T //temp variable,represent zero-value of type T
+		//如果不在范围内，返回一个错误
+		var t T //临时变量，代表T类型的零值
 		return t, errors.New("index out of bounds")
 	}
 	//If the index is within the bounds, return the element at the given index
 	return a.elements[index], nil
 }
 
-// Contains function checks if the array list contains a given value
+// Contains 方法返回一个布尔值，指示数组列表是否包含给定的值
 func (a *ArrayList[T]) Contains(val T) bool {
-	// Iterate through the elements in the array list
+	// 遍历数组列表的元素
 	for _, element := range a.elements {
-		// If the element matches the value, return true
+		// 如果元素与值匹配，则返回true
 		if reflect.DeepEqual(val, element) {
 			return true
 		}
